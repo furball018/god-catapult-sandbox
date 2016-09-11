@@ -23,7 +23,6 @@ public class impulseToMouse : MonoBehaviour {
             mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             dir = (transform.position - mousePos) * impulse;
             rig.AddForce(new Vector2(dir.x, dir.y) * -1);
-            Debug.Log(mousePos);
         }
 	}
 }
