@@ -34,6 +34,7 @@ public class ProjectileDragging : MonoBehaviour {
             Drag();
         if(spring != null)
         {
+            GetComponent<rotateInAir>().enabled = false;
             if (!rig.isKinematic && oldVel.sqrMagnitude > rig.velocity.sqrMagnitude)
             {
                 Destroy(spring);

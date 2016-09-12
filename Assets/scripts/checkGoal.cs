@@ -14,7 +14,6 @@ public class checkGoal : MonoBehaviour {
     void Start ()
     {
         cols = GetComponents<CircleCollider2D>();
-        
 	}
 	
 	// Update is called once per frame
@@ -23,7 +22,7 @@ public class checkGoal : MonoBehaviour {
         if(triggers == cols.Length && !triggered)
         {
             triggered = true;
-            Instantiate(part, transform);
+            Instantiate(part, transform.position, transform.rotation);
             Destroy(piece);
             fill.SetActive(true);
         }
