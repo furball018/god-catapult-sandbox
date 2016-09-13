@@ -3,24 +3,30 @@ using System.Collections;
 
 public class ProjectileDragging : MonoBehaviour {
 
+    public string pieceForm;
     public float Stretch = 3f;
     private float Stretch2;
     private bool clicked;
     
     private SpringJoint2D spring;
     private Transform catapult;
-    public GameObject cam;
+    private GameObject cam;
     private Ray mouseRay;
     private Rigidbody2D rig;
     private Vector2 oldVel;
 
     void Awake ()
     {
+        catapult = GameObject.FindGameObjectWithTag("catapult").transform;
         spring = GetComponent<SpringJoint2D>();
-        catapult = spring.connectedBody.transform;
+        spring.connectedBody = catapult.GetComponent<Rigidbody2D>();
+        Debug.Log(catapult);
         mouseRay = new Ray(catapult.position, Vector3.zero);
         Stretch2 = Stretch * Stretch;
         rig = GetComponent<Rigidbody2D>();
+        
+        cam = GameObject.FindGameObjectWithTag("MainCamera");
+        
     }
 
     void Start ()
@@ -30,15 +36,16 @@ public class ProjectileDragging : MonoBehaviour {
 	
 	void Update ()
     {
-        if(clicked)
+        if (clicked)
             Drag();
         if(spring != null)
         {
-            GetComponent<rotateInAir>().enabled = false;
             if (!rig.isKinematic && oldVel.sqrMagnitude > rig.velocity.sqrMagnitude)
             {
+                //Esto sucede cuando se catapulto la pieza por el aire
                 Destroy(spring);
                 rig.velocity = oldVel;
+                GetComponent<rotation>().enabled = false;
             }
         }
         if (!clicked)
@@ -55,6 +62,7 @@ public class ProjectileDragging : MonoBehaviour {
     }
     void OnMouseUp()
     {
+        
         spring.enabled = true;
         rig.isKinematic = false;
         cam.GetComponent<smoothCameraFollow>().enabled = true;

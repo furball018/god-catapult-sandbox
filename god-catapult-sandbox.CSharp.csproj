@@ -63,7 +63,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\scripts\LevelManagerScript.cs" />
     <Compile Include="Assets\scripts\ProjectileDragging.cs" />
+    <Compile Include="Assets\scripts\SplashLoader.cs" />
     <Compile Include="Assets\scripts\checkGoal.cs" />
     <Compile Include="Assets\scripts\impulseToMouse.cs" />
     <Compile Include="Assets\scripts\rotateInAir.cs" />
